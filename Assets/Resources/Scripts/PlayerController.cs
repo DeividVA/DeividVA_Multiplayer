@@ -23,4 +23,5 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) transform.position += new Vector3(0, -1, 0);
         if (Input.GetKeyDown(KeyCode.W)) transform.position += new Vector3(0, 1, 0);
     }
+
 }
