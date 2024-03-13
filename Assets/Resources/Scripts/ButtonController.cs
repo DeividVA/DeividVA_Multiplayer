@@ -7,7 +7,7 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
 
-    [SerializeField] private bool isPressed = false;
+    public static bool isPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +26,15 @@ public class ButtonController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponent<BoxCollider2D>().enabled = false;
         isPressed = true;   
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         GetComponent<SpriteRenderer>().color = Color.yellow;
-        isPressed= false;
+        GetComponent<BoxCollider2D>().enabled = true;
+        isPressed = false;
     }
 
 }
