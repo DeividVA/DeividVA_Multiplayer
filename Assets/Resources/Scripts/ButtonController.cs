@@ -4,15 +4,18 @@ using Unity.VisualScripting;
 using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class ButtonController : MonoBehaviourPunCallbacks
 {
 
-    public static bool isPressed = false;
+    private PhotonView _myPhotonView;
+    private SpriteRenderer _spriteRenderer;
+    public bool isPressed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _myPhotonView = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -25,16 +28,35 @@ public class ButtonController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
-        GetComponent<BoxCollider2D>().enabled = false;
-        isPressed = true;   
+        if (_myPhotonView.IsMine && !isPressed)
+        {
+            _myPhotonView.RPC("ChangeColorRed", RpcTarget.All);
+            isPressed = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        GetComponent<SpriteRenderer>().color = Color.yellow;
-        GetComponent<BoxCollider2D>().enabled = true;
-        isPressed = false;
+        if (_myPhotonView.IsMine && isPressed)
+        {
+            _myPhotonView.RPC("ChangeColorYellow", RpcTarget.All);
+            isPressed = false;
+        }
+    }
+
+    [PunRPC]
+    void ChangeColorRed() {
+
+        _spriteRenderer.color = Color.red;
+        Debug.Log("pressed");
+    }
+
+    [PunRPC]
+    void ChangeColorYellow()
+    {
+
+        _spriteRenderer.color = Color.yellow;
+        Debug.Log("released");
     }
 
 }

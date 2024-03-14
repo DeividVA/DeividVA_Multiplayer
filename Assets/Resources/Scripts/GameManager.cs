@@ -21,17 +21,17 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (ButtonController.isPressed) {
-            Debug.Log("pressed");
-            //b1p = true;
-            //Debug.Log(b1p);
-            //_pressedcount++;
-            //Debug.Log(_pressedcount);
-        } else
-        {
-            //b1p = false;
-            Debug.Log(b1p);
-        }
+        //if (ButtonController.isPressed) {
+        //    Debug.Log("pressed");
+        //    //b1p = true;
+        //    //Debug.Log(b1p);
+        //    //_pressedcount++;
+        //    //Debug.Log(_pressedcount);
+        //} else
+        //{
+        //    //b1p = false;
+        //    //Debug.Log(b1p);
+        //}
     }
 
 
