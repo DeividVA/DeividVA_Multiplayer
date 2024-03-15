@@ -45,18 +45,22 @@ public class ButtonController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ChangeColorRed() {
-
+    void ChangeColorRed() 
+    {
         _spriteRenderer.color = Color.red;
         Debug.Log("pressed");
+        NetworkManager.ButtonPressed();
     }
 
     [PunRPC]
     void ChangeColorYellow()
     {
-
         _spriteRenderer.color = Color.yellow;
         Debug.Log("released");
+        NetworkManager.ButtonReleased();
     }
+
+
+
 
 }

@@ -42,6 +42,7 @@ MonoBehaviour:
   - ChangeColor
   - ChangeColorRed
   - ChangeColorYellow
+  - DoorActivation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
