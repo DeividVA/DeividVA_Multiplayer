@@ -9,6 +9,7 @@ public class ButtonController : MonoBehaviourPunCallbacks
 
     private PhotonView _myPhotonView;
     private SpriteRenderer _spriteRenderer;
+    private BoxCollider2D _boxcollider2D;
     public bool isPressed = false;
 
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class ButtonController : MonoBehaviourPunCallbacks
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _myPhotonView = GetComponent<PhotonView>();
+        _boxcollider2D = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -58,6 +60,13 @@ public class ButtonController : MonoBehaviourPunCallbacks
         _spriteRenderer.color = Color.yellow;
         Debug.Log("released");
         NetworkManager.ButtonReleased();
+    }
+
+
+    public static void Blocker(GameObject objecttoblock)
+    {
+        //objecttoblock.GetComponent<SpriteRenderer>() = Color.black;
+        //_boxcollider2D.enabled = false;
     }
 
 

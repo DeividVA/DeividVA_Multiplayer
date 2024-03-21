@@ -17,6 +17,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private PhotonView _myPhotonView;
 
+    private SpriteRenderer _buttonRenderer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +54,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             _buttonL = PhotonNetwork.Instantiate("Prefabs/button", new Vector3(-10, 2, 0), Quaternion.identity);
             _buttonR = PhotonNetwork.Instantiate("Prefabs/button", new Vector3(10, 2, 0), Quaternion.identity);
-            _door = PhotonNetwork.Instantiate("Prefabs/door", new Vector3(0, -5, 0), Quaternion.identity);
+            _door = PhotonNetwork.Instantiate("Prefabs/door", new Vector3(0, -3, 0), Quaternion.identity);
             //_door.SetActive(false);
         }
     }
@@ -61,7 +64,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (_playerID == 1 && buttonsPressed == 2 && _door.active)
         {
+            
             _myPhotonView.RPC("DoorActivation", RpcTarget.All);
+            _myPhotonView.RPC("Blocker", RpcTarget.All);
         }
     }
 
@@ -82,4 +87,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         NetworkManager.buttonsPressed--;
     }
+
+    [PunRPC]
+    void Blocker()
+    {
+        _buttonL.GetComponent<SpriteRenderer>().color = Color.white;
+        _buttonR.GetComponent<SpriteRenderer>().color = Color.white;
+        _buttonL.GetComponent<BoxCollider2D>().enabled = false;
+        _buttonR.GetComponent<BoxCollider2D>().enabled = false;
+
+    }
+
 }
